@@ -1,6 +1,6 @@
 ### Checkpoint n°2 CDA JS - Backend
 
-Le but de ce checkpoint est de vérifier tes connaissances en développement backend uniquement en se basant sur Apollo, GraphQL, TypeORM et Sqlite.
+Le but de ce checkpoint est de vérifier tes connaissances en développement backend uniquement en se basant sur Apollo, GraphQL, TypeORM et SQlite.
 
 :warning: :warning: :warning:
 
@@ -34,13 +34,14 @@ Voici les packages dont tu auras besoin :
  "@types/node":\
 },
 
-- C/ Crée le fichier `index.ts`, point d'entrée sur tn serveur et ajoute un script dans ton `package.json` pour le lancer `npm run dev`.
+- C/ Crée le fichier `index.ts`, point d'entrée sur ton serveur et ajoute un script dans ton `package.json` pour le lancer `npm run dev`.
 - D/ Crée un ficher `.env` et `.env-sample`
+- E/ Ecris le script de lancement d'un serveur Apollo avec le `buildSchema`de type-graph
 
 ## STEP 02 : Mise en place des composants d'accès à la données
 
 - A/ Mise en place d'une entités TypeORM pour la table pays (id, name, code, flag)
-- B/ Mise en place de la connexion à Sqlite (utilise les variables d'env)
+- B/ Mise en place de la connexion à PostGres (utilise les variables d'env)
 - C/ Mise en place du serveur avec l'initialisation / synchro de la DB vierge. La data sera ajoutée par la mutation.
 - D/ Mise en place d'un resolver et ajout du schéma sur le serveur
 
@@ -49,7 +50,7 @@ Voici les packages dont tu auras besoin :
   un nom (France, Belgique, Andorre, ...),
   un emoji (🇫🇷, 🇧🇪, 🇦🇩, ...),
   et qui enregistre cette entrée en BDD.
-  Attention, l'ensemble des champs doit être validé (Ebis)
+  Attention, l'ensemble des champs doit être validé par `class-Validator`
 
 - F/ Crée ensuite 2 queries :
   Une qui renvoie la liste de tous les pays (avec pour attributs, pour chaque pays, le code, le nom, l'emoji) (F)\
@@ -61,13 +62,20 @@ Voici les packages dont tu auras besoin :
 
 ## Step 03: Bonus 1
 
-- Ajoute l'environnement de test graphQL / Jest et teste une de tes routes
+- Ajoute un code continent dans une nouvelle entité et synchronise celui ci à la mutation d'ajout de pays
+- Ajoute une query qui permet de récupérer tous les pays d'un continent (continent.resolvers.ts)
+
+:warning: :warning: :warning: Attention
 
 ## Step 04: Bonus 2
 
-- Ajoute un code continent à la mutation d'ajout de pays et une query qui permet de récupérer tous les pays d'un continent
+-Modifie ton code pour passer en environnement Docker
 
-:warning: :warning: :warning: Attention
+- B/ Mets en place un DOCKERFILE dans ton backend(serveur)
+- C/ Mets en place un Docker Compose avec Postgres, Adminer et ton API
+  - Options de volumes
+  - Options de Port
+  - Options de variables d'environnement
 
 ```
 Pense à commiter ton travail à chaque petite étape avec un message claire et explicite  et une reprise de la numéroation des US
