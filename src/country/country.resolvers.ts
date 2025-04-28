@@ -25,11 +25,11 @@ export class CountryResolvers {
     const ifError = await validate(country).then(errors => {
       if (errors.length > 0) {
         console.error(errors);
-        return -1;
+        return false;
       }
-      return 1;
+      return true;
     });
-    if(ifError === 1) {
+    if(ifError) {
       const result = await country.save();
       return result.id;
     }
