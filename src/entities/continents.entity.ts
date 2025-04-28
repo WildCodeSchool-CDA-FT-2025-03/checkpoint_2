@@ -14,9 +14,9 @@ export class ContinentEntity extends BaseEntity {
   id: number;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   name: string;
 
-  @OneToMany(() => PaysEntity, (pays) => pays.contient)
+  @OneToMany(() => PaysEntity, (pays) => pays.continent)
   pays: PaysEntity;
 }
