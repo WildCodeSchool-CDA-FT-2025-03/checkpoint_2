@@ -1,31 +1,27 @@
 import "reflect-metadata";
 
-import { DataSource } from "typeorm";
-import dotenv from "dotenv";
+import { ApolloServer } from "@apollo/server";
+import { AppDataSource } from "./data/client";
+import { CountryResolver } from "./resolvers/country.resolver";
+import { buildSchema } from "type-graphql";
+import { startStandaloneServer } from "@apollo/server/standalone";
 
-// Charger les variables d'environnement
-dotenv.config();
+async function main() {
+  await AppDataSource.initialize();
 
-async function bootstrap() {
-  try {
-    // Configuration de la base de données
-    const AppDataSource = new DataSource({
-      type: "sqlite",
-      database: "database.sqlite",
-      synchronize: true,
-      logging: true,
-      entities: [],
-      migrations: [],
-      subscribers: [],
-    });
+  const schema = await buildSchema({
+    resolvers: [CountryResolver],
+  });
 
-    // Initialiser la connexion à la base de données
-    await AppDataSource.initialize();
-    console.log("Database connection initialized");
-    console.log("🚀 Server ready");
-  } catch (error) {
-    console.error("Error during bootstrap:", error);
-  }
+  const server = new ApolloServer({
+    schema,
+  });
+
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+  });
+
+  console.log(`Server is running on ${url} 🧙`);
 }
 
-bootstrap();
+main().catch(console.error);
