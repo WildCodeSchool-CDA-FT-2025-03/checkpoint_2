@@ -1,12 +1,27 @@
 {
   "name": "checkpoint2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Le but de ce checkpoint est de vérifier tes connaissances en développement backend uniquement en se basant sur Apollo, GraphQL, TypeORM et SQlite.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "commit": "bash ./npm-run-commit.sh"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.12.0",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.5.0",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "ts-node-dev": "^2.0.0",
+    "type-graphql": "^2.0.0-rc.2",
+    "typeorm": "^0.3.22"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3"
+  }
 }
