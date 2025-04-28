@@ -40,7 +40,7 @@ Voici les packages dont tu auras besoin :
 ## STEP 02 : Mise en place des composants d'accès à la données
 
 - A/ Mise en place d'une entités TypeORM pour la table pays (id, name, code, flag)
-- B/ Mise en place de la connexion à PostGres (utilise les variables d'env)
+- B/ Mise en place de la connexion à Sqlite (utilise les variables d'env)
 - C/ Mise en place du serveur avec l'initialisation / synchro de la DB vierge. La data sera ajoutée par la mutation.
 - D/ Mise en place d'un resolver et ajout du schéma sur le serveur
 
