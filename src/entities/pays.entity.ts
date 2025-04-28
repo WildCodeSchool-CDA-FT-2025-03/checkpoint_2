@@ -1,3 +1,4 @@
+import { IsNotEmpty, Length } from "class-validator";
 import { Field, InputType, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
@@ -11,6 +12,7 @@ export class PaysEntity extends BaseEntity {
   @Column()
   name?: string;
 
+  @Length(2, 2)
   @Field()
   @Column()
   code?: string;
