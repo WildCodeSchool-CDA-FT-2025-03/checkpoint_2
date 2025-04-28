@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 import { Length } from "class-validator";
+import { Continent } from "./Continent";
 
 @ObjectType()
 @Entity()
@@ -23,4 +24,9 @@ export class Country extends BaseEntity {
   @Column()
   @Length(1, 2)
   flag: string;
+
+  @ManyToOne(() => Continent, (continent) => continent.countries)
+  @JoinColumn({ name: "continentId" }) // La colonne qui lie les pays au continent
+  @Field(() => Continent) // Exposer le continent associé dans GraphQL
+  continent: Continent;
 }

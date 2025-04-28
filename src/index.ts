@@ -5,6 +5,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { buildSchema } from "type-graphql";
 import { AppDataSource } from "./data-source";
 import { CountryResolver } from "./resolvers/CountryResolver";
+import { ContinentResolver } from "./resolvers/ContinentResolver";
 
 
 dotenv.config();
@@ -14,7 +15,7 @@ async function main() {
   console.log("📦 Database connected!");
 
   const schema = await buildSchema({
-    resolvers: [CountryResolver],
+    resolvers: [CountryResolver, ContinentResolver],
     validate: true,
   });
 
