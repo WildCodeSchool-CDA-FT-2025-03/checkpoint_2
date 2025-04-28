@@ -7,12 +7,13 @@ import { buildSchema } from 'type-graphql';
 
 import { dataSource } from './database/client';
 import { CountryResolver } from './resolvers/country.resolver';
+import { ContinentResolver } from './resolvers/continent.resolver';
 
 async function main() {
   await dataSource.initialize();
 
   const schema = await buildSchema({
-    resolvers: [CountryResolver],
+    resolvers: [CountryResolver, ContinentResolver],
   });
 
   const server = new ApolloServer({
