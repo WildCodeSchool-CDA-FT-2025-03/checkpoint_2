@@ -1,6 +1,7 @@
 import { Mutation, Query, Resolver, Arg, Int } from "type-graphql";
 import { Country, CountryInput } from "./country.entities";
 import { validate } from 'class-validator';
+import { Continent } from "../continent/continent.entities";
 
 @Resolver()
 export class CountryResolvers {
@@ -22,17 +23,26 @@ export class CountryResolvers {
     country.name = data.name;
     country.code = data.code;
     country.flag = data.flag;
-    const ifError = await validate(country).then(errors => {
-      if (errors.length > 0) {
-        console.error(errors);
-        return false;
-      }
-      return true;
-    });
-    if(ifError) {
-      const result = await country.save();
-      return result.id;
+    const isContinent = await Continent.findOneBy({ id: data.continentId });
+    if(!isContinent) {
+      console.error("Continent not found");
+      return -1;
     }
-    return -1;
+    else {
+      country.continent = isContinent;
+
+      const ifError = await validate(country).then(errors => {
+        if (errors.length > 0) {
+          console.error(errors);
+          return false;
+        }
+        return true;
+      });
+      if(ifError) {
+        const result = await country.save();
+        return result.id;
+      }
+      return -1;
+    }
   }
 };
