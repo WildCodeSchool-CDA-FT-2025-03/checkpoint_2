@@ -1,27 +1,21 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
 export class PaysEntity extends BaseEntity {
-  constructor() {
-    super();
-    this.id = 0;
-    this.name = "";
-    this.code = "";
-    this.flag = "";
-  }
+  @PrimaryGeneratedColumn("uuid")
+  id?: number;
 
   @Field()
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
-  name: string;
+  name?: string;
 
+  @Field()
   @Column()
-  code: string;
+  code?: string;
 
+  @Field()
   @Column()
-  flag: string;
+  flag?: string;
 }
