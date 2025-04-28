@@ -9,6 +9,15 @@ export class CountryResolver {
     return Country.find();
   }
 
+  @Query(() => Country)
+  async country(@Arg("code") code: string): Promise<Country | null> {
+    const country = await Country.findOne({ where: { code } });
+    if (!country) {
+      throw new Error("Country not found");
+    }
+    return country;
+  }
+
   @Mutation(() => Country)
   async createCountry(@Arg("name") name: string, @Arg("code") code: string, @Arg("flag") flag: string): Promise<Country> {
     const country = new Country();
