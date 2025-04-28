@@ -6,7 +6,7 @@ import { rmSync } from "fs";
 @Resolver(Pays)
 export class PaysResolver {
   @Query(() => [Pays])
-  async getPays(): Promise<Pays[]> {
+  async getAllPays(): Promise<Pays[]> {
     return await Pays.find();
   }
 
