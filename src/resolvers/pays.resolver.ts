@@ -15,6 +15,9 @@ export class PaysInput {
   code: string;
   @Field()
   flag: string;
+
+  @Field()
+  contient: string;
 }
 
 @Resolver(PaysEntity)
