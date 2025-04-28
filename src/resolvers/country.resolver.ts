@@ -8,6 +8,11 @@ export default class CountryResolver {
     return Country.find();
   }
 
+  @Query(() => Country)
+  async getOneCountryByCode(@Arg("code") code: string): Promise<Country | null> {
+    return Country.findOne({ where: { code } });
+  }
+
   @Mutation(() => Country)
   async createCountry(
     @Arg("name") name: string,
