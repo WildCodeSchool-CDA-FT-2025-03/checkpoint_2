@@ -2,6 +2,7 @@ import { Arg, Mutation, Query } from "type-graphql";
 import { Country, CountryInput } from "../entities/country.entity";
 import { EntityNotFoundError } from "typeorm";
 import { ApolloError } from "apollo-server-errors";
+import { validate } from "class-validator";
 
 
 export class CountryResolver {
@@ -13,6 +14,11 @@ export class CountryResolver {
     countryEntity.name = data.name;
     countryEntity.flag = data.flag;
 
+    const error = await validate(countryEntity);
+    if (error.length > 0) {
+      console.error(error)
+      throw new Error("validation failed")
+    }
     countryEntity.save();
     return true
   }
