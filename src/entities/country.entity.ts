@@ -1,22 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
 
+@ObjectType()
 @Entity()
 export class Country extends BaseEntity {
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Field(() => String)
+  @Column({ type: "varchar" })
   name: string;
 
-  @Column()
+  @Field(() => String)
+  @Column({ type: "varchar" })
   code: string;
 
-  @Column()
+  @Field(() => String)
+  @Column({ type: "varchar" })
   flag: string;
 
-  @Column()
+  @Field(() => Date)
+  @Column({ type: "timestamp" })
   createdAt: Date;
 
-  @Column()
+  @Field(() => Date)
+  @Column({ type: "timestamp" })
   updatedAt: Date;
 }
