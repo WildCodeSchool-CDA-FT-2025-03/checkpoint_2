@@ -30,6 +30,7 @@ export class PaysEntity extends BaseEntity {
   @Column()
   flag: string;
 
-  @ManyToOne(() => ContinentEntity, (contient) => contient.pays)
-  continent: ContinentEntity;
+  @Field(() => ContinentEntity)
+  @ManyToOne(() => ContinentEntity, (contient) => contient.pays_entity)
+  continent_entity: ContinentEntity;
 }
