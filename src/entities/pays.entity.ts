@@ -4,9 +4,12 @@ import {
   BaseEntity,
   Column,
   Entity,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm";
+import { ContinentEntity } from "./continents.entity";
 
 @ObjectType()
 @Entity()
@@ -26,4 +29,7 @@ export class PaysEntity extends BaseEntity {
   @Field()
   @Column()
   flag: string;
+
+  @ManyToOne(() => ContinentEntity, (contient) => contient.pays)
+  contient: ContinentEntity;
 }

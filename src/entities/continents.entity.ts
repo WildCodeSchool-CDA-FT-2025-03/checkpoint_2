@@ -1,5 +1,12 @@
 import { Field } from "type-graphql";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { PaysEntity } from "./pays.entity";
 
 @Entity()
 export class ContinentEntity extends BaseEntity {
@@ -9,4 +16,7 @@ export class ContinentEntity extends BaseEntity {
   @Field()
   @Column()
   name: string;
+
+  @OneToMany(() => PaysEntity, (pays) => pays.contient)
+  pays: PaysEntity;
 }
