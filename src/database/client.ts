@@ -1,5 +1,7 @@
 import { DataSource } from 'typeorm';
 
+import { Country } from '../entities/country.entity';
+
 import 'dotenv/config';
 
 export const dataSource = new DataSource({
@@ -9,7 +11,7 @@ export const dataSource = new DataSource({
   username: process.env.DB_USERNAME || 'checkpoint',
   password: process.env.DB_PASSWORD || 'password-très-sécurisé',
   database: process.env.DB_DATABASE || 'checkpoint',
-  entities: [],
+  entities: [Country],
   synchronize: true,
   logging: true,
 });
