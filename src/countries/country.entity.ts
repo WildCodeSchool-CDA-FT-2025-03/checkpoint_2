@@ -1,7 +1,14 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import "reflect-metadata";
 import { Field, InputType, ObjectType } from "type-graphql";
-import { IsPhoneNumber, IsString, Length } from "class-validator";
+import { IsString, Length } from "class-validator";
+import { Continent } from "../continents/continents.entity";
 
 @ObjectType()
 @Entity()
@@ -21,6 +28,11 @@ export class Country extends BaseEntity {
   @Field()
   @Column()
   flag: string;
+
+  @ManyToOne(() => Continent, (continent) => continent.country, {
+    cascade: true,
+  })
+  continent: Continent;
 }
 
 @InputType()
@@ -37,4 +49,8 @@ export class CountryInput {
   @Field()
   @IsString()
   flag: string;
+
+  @Field()
+  @IsString()
+  continent: string;
 }

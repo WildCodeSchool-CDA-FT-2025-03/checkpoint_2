@@ -4,11 +4,12 @@ import dataSource from "./client";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import CountryResolver from "./countries/country.resolvers";
+import ContinentResolver from "./continents/continents.resolvers";
 
 (async () => {
   await dataSource.initialize();
   const schema = await buildSchema({
-    resolvers: [CountryResolver],
+    resolvers: [CountryResolver, ContinentResolver],
     validate: true,
   });
 
