@@ -1,11 +1,12 @@
 import { DataSource } from "typeorm";
 import { PaysEntity } from "../entities/pays.entity";
+import { ContinentEntity } from "../resolvers/continents.resolver";
 
 const sync = process.env.DB_SYNC === "true" ? true : false;
 
 export const dataSource = new DataSource({
   type: "sqlite",
   database: process.env.DB_SQLITE_PATH || "./db.sqlite",
-  entities: [PaysEntity],
+  entities: [PaysEntity, ContinentEntity],
   synchronize: sync,
 });
