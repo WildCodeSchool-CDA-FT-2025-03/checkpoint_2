@@ -7,16 +7,21 @@ import { buildSchema } from "type-graphql";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
 async function main() {
+  // Initialisation de la base de données
   await AppDataSource.initialize();
 
+  // Construction du schéma GraphQL avec le resolver
   const schema = await buildSchema({
     resolvers: [CountryResolver],
+    validate: true, // Activation de la validation des données
   });
 
+  // Création du serveur Apollo
   const server = new ApolloServer({
     schema,
   });
 
+  // Démarrage du serveur
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
   });
