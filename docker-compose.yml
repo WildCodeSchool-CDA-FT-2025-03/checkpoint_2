@@ -16,11 +16,11 @@ services:
       test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
-      - db_data:/var/lib/postgresql/data/ # pour la persistance des données PostgreSQL
+      - db_data:/var/lib/postgresql/data/
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-password} # Valeur par défaut 'password' si non définie
-      POSTGRES_DB: ${DB_NAME:-mydatabase}       
-      POSTGRES_USER: ${DB_USER:-user}           
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME:-mydatabase}
+      POSTGRES_USER: ${DB_USER:-user}
     ports:
       - "5432:5432"
 
@@ -40,9 +40,9 @@ services:
     <<: *baseService
     build:
       context: ./
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile
     ports:
-      - "4000:4000" 
+      - "4000:4000"
     environment:
       PORT: ${PORT:-4000}
       DATABASE_URL: postgres://${DB_USER:-user}:${DB_PASSWORD:-password}@db:5432/${DB_NAME:-mydatabase}
@@ -53,3 +53,6 @@ services:
       db:
         condition: service_healthy
 
+volumes:
+  db_data:
+  node_modules:
