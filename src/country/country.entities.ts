@@ -1,5 +1,5 @@
 import { Field, ObjectType, InputType } from 'type-graphql';
-import { PrimaryGeneratedColumn, BaseEntity, Entity, Column, In } from 'typeorm';
+import { PrimaryGeneratedColumn, BaseEntity, Entity, Column } from 'typeorm';
 
 @ObjectType()
 @Entity('country')
@@ -18,7 +18,7 @@ export class Country extends BaseEntity {
 
   @Field()
   @Column()
-  flag: boolean;
+  flag: string;
 }
 
 @InputType()
@@ -30,5 +30,5 @@ export class CountryInput {
   code: string;
 
   @Field()
-  flag: boolean;
+  flag: string;
 }
