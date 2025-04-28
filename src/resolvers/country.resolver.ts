@@ -1,9 +1,10 @@
 import { Resolver, Query } from "type-graphql";
+import { Country } from "../entities/country.entity";
 
 @Resolver()
 export class CountryResolver {
-  @Query(() => String)
-  async hello(): Promise<string> {
-    return 'Hello World';
+  @Query(() => [Country])
+  async countries(): Promise<Country[]> {
+    return Country.find();
   }
 }
