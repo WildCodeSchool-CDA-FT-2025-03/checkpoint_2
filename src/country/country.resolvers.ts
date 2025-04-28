@@ -1,4 +1,4 @@
-import { Mutation, Query, Resolver, Arg } from "type-graphql";
+import { Mutation, Query, Resolver, Arg, Int } from "type-graphql";
 import { Country, CountryInput } from "./country.entities";
 
 @Resolver()
@@ -8,7 +8,7 @@ export class CountryResolvers {
     return await Country.find();
   }
 
-  @Mutation(() => Country)
+  @Mutation(() => Int)
   async createCountry(@Arg("data") data: CountryInput): Promise<number> {
     const country = new Country();
     country.name = data.name;
