@@ -1,0 +1,45 @@
+x-baseService: &baseService
+  restart: always
+  healthcheck:
+    interval: 1s
+    timeout: 2s
+    retries: 10
+
+services:
+  db:
+    <<: *baseService
+    image: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${DB_NAME} -U ${DB_USER}"]
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+
+  adminer:
+    <<: *baseService
+    image: adminer
+    ports:
+      - 8080:8080
+    container_name: adminer
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    <<: *baseService
+    build:
+      context: ./
+    image: api
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 5000:5000
+    environment:
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - SERVER_PORT=${SERVER_PORT}
+    depends_on:
+      db:
+        condition: service_healthy

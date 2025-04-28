@@ -1,5 +1,5 @@
 import { Continent } from "../../continent/continent.entities";
-import { dataSource } from "../client";
+import dataSource from "../client";
 
 (async () => {
   console.info("Starting the migration");

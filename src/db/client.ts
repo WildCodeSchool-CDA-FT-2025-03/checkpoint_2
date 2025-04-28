@@ -3,10 +3,17 @@ import "dotenv/config";
 import { Country } from "../country/country.entities";
 import { Continent } from "../continent/continent.entities";
 
-export const dataSource = new DataSource({
-  type: "sqlite", // Type de BDD recherchée (MySQL, PostGres, SQLite, ...)
-  database: "./db.sqlite", // Prépférable de la mettre en .env
-  entities: [Country, Continent], // On placera nos modèles de données ici
-  synchronize: true, // Propriété de stratégie de synchronisation (ici, l'on synchronise à chaque fois que l'on lance le projet) ! Ne pas laisser en prod
+const { DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+
+const dataSource = new DataSource({
+  entities: [Country, Continent],
+  type: "postgres",
+  host: "db",
+  port: 5432,
+  username: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  synchronize: true
 });
+
 export default dataSource;
