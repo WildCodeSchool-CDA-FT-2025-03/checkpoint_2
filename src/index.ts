@@ -16,6 +16,6 @@ import { PaysResolver } from "./entites/pays.resolver";
 
     const server = new ApolloServer({ schema });
     await startStandaloneServer(server, {
-        listen: { port: +process.env.SERVER_PORT },
+        listen: { port: 5432 },
     });
 })();
