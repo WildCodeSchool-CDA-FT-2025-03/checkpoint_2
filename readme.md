@@ -36,7 +36,6 @@ Voici les packages dont tu auras besoin :
 
 - C/ Crée le fichier `index.ts`, point d'entrée sur ton serveur et ajoute un script dans ton `package.json` pour le lancer `npm run dev`.
 - D/ Crée un ficher `.env` et `.env-sample`
-- E/ Ecris le script de lancement d'un serveur Apollo avec le `buildSchema`de type-graph
 
 ## STEP 02 : Mise en place des composants d'accès à la données
 
