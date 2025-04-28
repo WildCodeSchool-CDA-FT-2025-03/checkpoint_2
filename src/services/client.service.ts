@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import { PaysEntity } from "../entities/pays.entity";
-import { ContinentEntity } from "../resolvers/continents.resolver";
+import { ContinentEntity } from "../entities/continents.entity";
 
 const sync = process.env.DB_SYNC === "true" ? true : false;
 
