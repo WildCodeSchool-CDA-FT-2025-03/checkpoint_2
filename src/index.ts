@@ -1,7 +1,12 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import "dotenv/config";
+
+import { dataSource } from "./database/db";
+
 (async () => {
+  await dataSource.initialize();
+
   const server = new ApolloServer({
     typeDefs: `
     type Query {
