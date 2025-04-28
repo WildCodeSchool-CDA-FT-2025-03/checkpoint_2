@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { Country } from "../entities/country.entity";
+import { Country, CountryInput } from "../entities/country.entity";
 
 @Resolver(Country)
 export default class CountryResolver {
@@ -14,16 +14,11 @@ export default class CountryResolver {
   }
 
   @Mutation(() => Country)
-  async createCountry(
-    @Arg("name") name: string,
-    @Arg("code") code: string,
-    @Arg("flag") flag: string
-  ): Promise<Country> {
-    const country = Country.create({
-      name: name || "",
-      code: code || "",
-      flag: flag || "",
-    });
+  async createCountry(@Arg("countryInput") countryInput: CountryInput): Promise<Country> {
+    const country = new Country();
+    country.name = countryInput.name;
+    country.code = countryInput.code;
+    country.flag = countryInput.flag;
     await country.save();
     return country;
   }

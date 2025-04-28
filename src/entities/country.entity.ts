@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
@@ -7,19 +7,35 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Country extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @Field()
   @Column()
   @IsNotEmpty()
-  name?: string;
+  name: string;
 
   @Field()
   @Column()
   @IsNotEmpty()
-  code?: string;
+  code: string;
 
   @Field()
   @Column()
-  flag?: string;
+  @IsNotEmpty()
+  flag: string;
+}
+
+@InputType()
+export class CountryInput {
+  @Field()
+  @IsNotEmpty()
+  name: string;
+
+  @Field()
+  @IsNotEmpty()
+  code: string;
+
+  @Field()
+  @IsNotEmpty()
+  flag: string;
 }
