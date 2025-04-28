@@ -1,4 +1,4 @@
-import "dotenv";
+import "dotenv/config";
 import { dataSource } from "./services/client.service";
 
 (async () => {
