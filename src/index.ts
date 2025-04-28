@@ -4,7 +4,7 @@ import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 import "dotenv/config";
 
-import { dataSource } from "./database/db";
+import { dataSource } from "./database/client";
 
 import CountryResolver from "./resolvers/country.resolver";
 
