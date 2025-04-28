@@ -3,11 +3,16 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { buildSchema } from "type-graphql";
 import dotenv from "dotenv";
+import { AppDataSource } from "./config/dataSource";
 import { PingResolver } from "./resolvers/ping.resolver";
 
 dotenv.config();
 
 async function main() {
+  await AppDataSource.initialize()
+    .then(() => console.log("📦 Database connected successfully"))
+    .catch((err) => console.error("❌ Database connection error:", err));
+
   const schema = await buildSchema({
     resolvers: [PingResolver],
     validate: false,
