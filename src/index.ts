@@ -5,6 +5,8 @@ import { buildSchema } from "type-graphql";
 import dotenv from "dotenv";
 import { AppDataSource } from "./config/dataSource";
 import { PingResolver } from "./resolvers/ping.resolver";
+import { CountryResolver } from "./resolvers/country.resolver";
+
 
 dotenv.config();
 
@@ -14,9 +16,10 @@ async function main() {
     .catch((err) => console.error("❌ Database connection error:", err));
 
   const schema = await buildSchema({
-    resolvers: [PingResolver],
-    validate: false,
-  });
+  resolvers: [PingResolver, CountryResolver],
+  validate: false,
+});
+
 
   const server = new ApolloServer({
     schema,
