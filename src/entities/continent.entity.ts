@@ -1,36 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
 import { Field, ID, ObjectType } from "type-graphql";
-import { Length, IsNotEmpty, Matches } from "class-validator";
-import { Continent } from "./continent.entity";
+import { Length, IsNotEmpty } from "class-validator";
+import { Country } from "./country.entity";
 
 @ObjectType()
 @Entity()
-export class Country extends BaseEntity {
+export class Continent extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
   @Field(() => String)
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", unique: true })
   @IsNotEmpty({ message: "Le nom ne peut pas être vide" })
   @Length(2, 100, { message: "Le nom doit contenir entre 2 et 100 caractères" })
   name: string;
 
   @Field(() => String)
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", unique: true })
   @IsNotEmpty({ message: "Le code ne peut pas être vide" })
   @Length(2, 3, { message: "Le code doit contenir 2 ou 3 caractères" })
-  @Matches(/^[A-Z]{2,3}$/, { message: "Le code doit être composé de 2 ou 3 lettres majuscules" })
   code: string;
 
-  @Field(() => String)
-  @Column({ type: "varchar" })
-  @IsNotEmpty({ message: "Le drapeau ne peut pas être vide" })
-  flag: string;
-
-  @Field(() => Continent)
-  @ManyToOne(() => Continent, continent => continent.countries)
-  continent: Continent;
+  @Field(() => [Country])
+  @OneToMany(() => Country, country => country.continent)
+  countries: Country[];
 
   @Field(() => Date)
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
