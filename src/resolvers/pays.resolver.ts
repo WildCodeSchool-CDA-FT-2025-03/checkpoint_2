@@ -19,9 +19,16 @@ export class PaysInput {
 
 @Resolver(PaysEntity)
 class PaysResolver {
-  @Query(() => PaysEntity)
+  @Query(() => [PaysEntity])
   async getPays(): Promise<PaysEntity[]> {
-    return [];
+    const pays = await PaysEntity.find();
+    return pays;
+  }
+
+  @Query(() => PaysEntity)
+  async getOnePays(@Arg("code") code: string): Promise<PaysEntity> {
+    const pays = await PaysEntity.findOne({ where: { code: code } });
+    return pays;
   }
 
   @Mutation(() => String)
