@@ -1,22 +1,9 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
-
 import { validate } from "class-validator";
+import { Arg, Mutation, Resolver } from "type-graphql";
 import { Country } from "../entities/country.entity";
 
 @Resolver()
 export class CountryResolver {
-  @Query(() => [Country])
-  async countries(): Promise<Country[]> {
-    return Country.find();
-  }
-
-  @Query(() => Country, { nullable: true })
-  async country(
-    @Arg("code", () => String) code: string
-  ): Promise<Country | null> {
-    return Country.findOne({ where: { code } });
-  }
-
   @Mutation(() => Country)
   async createCountry(
     @Arg("code", () => String) code: string,

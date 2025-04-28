@@ -2,6 +2,7 @@ import "reflect-metadata";
 
 import { ApolloServer } from "@apollo/server";
 import { AppDataSource } from "./data/client";
+import { CountryQueries } from "./resolvers/country.queries";
 import { CountryResolver } from "./resolvers/country.resolver";
 import { buildSchema } from "type-graphql";
 import { startStandaloneServer } from "@apollo/server/standalone";
@@ -12,7 +13,7 @@ async function main() {
 
   // Construction du schéma GraphQL avec le resolver
   const schema = await buildSchema({
-    resolvers: [CountryResolver],
+    resolvers: [CountryResolver, CountryQueries],
     validate: true, // Activation de la validation des données
   });
 

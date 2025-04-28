@@ -7,13 +7,13 @@ import { IsString, Length, Matches } from "class-validator";
 export class Country extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
-  id!: number;
+  id: number;
 
   @Field(() => String)
   @Column("varchar", { length: 50 })
   @IsString({ message: "Le nom doit être une chaîne de caractères" })
   @Length(2, 50, { message: "Le nom doit contenir entre 2 et 50 caractères" })
-  name!: string;
+  name: string;
 
   @Field(() => String)
   @Column("varchar", { length: 2 })
@@ -22,7 +22,7 @@ export class Country extends BaseEntity {
   @Matches(/^[A-Z]{2}$/, {
     message: "Le code pays doit être en majuscules (ex: FR, BE, AN)",
   })
-  code!: string;
+  code: string;
 
   @Field(() => String)
   @Column("varchar", { length: 10 })
@@ -33,5 +33,5 @@ export class Country extends BaseEntity {
   @Matches(/^[\u{1F1E6}-\u{1F1FF}]{2}$/u, {
     message: "Le drapeau doit être un emoji de pays valide (ex: 🇫🇷, 🇧🇪, 🇦🇩)",
   })
-  flag!: string;
+  flag: string;
 }
