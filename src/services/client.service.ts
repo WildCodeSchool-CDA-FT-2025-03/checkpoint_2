@@ -1,9 +1,11 @@
 import { DataSource } from "typeorm";
 import { PaysEntity } from "../entities/pays.entity";
 
+const sync = process.env.DB_SYNC === "true" ? true : false;
+
 export const dataSource = new DataSource({
   type: "sqlite",
-  database: "./db.sqlite",
+  database: process.env.DB_SQLITE_PATH || "./db.sqlite",
   entities: [PaysEntity],
-  synchronize: true,
+  synchronize: sync,
 });
